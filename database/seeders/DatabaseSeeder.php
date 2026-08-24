@@ -16,15 +16,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->superAdmin()->create([
+            'name' => 'Super Admin',
             'email' => 'superadmin@arka.test',
+            'employee_id' => 'EMP-00001',
         ]);
 
         User::factory()->admin()->create([
+            'name' => 'Admin User',
             'email' => 'admin@arka.test',
+            'employee_id' => 'EMP-00002',
         ]);
 
         User::factory()->create([
+            'name' => 'Employee User',
             'email' => 'employee@arka.test',
+            'employee_id' => 'EMP-00003',
         ]);
     }
 }

@@ -25,9 +25,12 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'role' => User::ROLE_EMPLOYEE,
+            'employee_id' => 'EMP-'.fake()->unique()->numberBetween(1000, 99999),
+            'status' => User::STATUS_ACTIVE,
             'remember_token' => Str::random(10),
         ];
     }
@@ -49,6 +52,16 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => User::ROLE_SUPER_ADMIN,
+        ]);
+    }
+
+    /**
+     * Indicate that the user's account is inactive.
+     */
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => User::STATUS_INACTIVE,
         ]);
     }
 }
