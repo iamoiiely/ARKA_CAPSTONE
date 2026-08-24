@@ -79,7 +79,7 @@ export default function Login({ status, canResetPassword }: Props) {
 
                             <Button
                                 type="submit"
-                                className="mt-4 w-full"
+                                className="mt-4 w-full bg-emerald-600 hover:bg-emerald-700"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"

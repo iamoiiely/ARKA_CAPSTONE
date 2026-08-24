@@ -1,5 +1,5 @@
-import { Link, usePage } from '@inertiajs/react';
-import AppLogoIcon from '@/components/app-logo-icon';
+import { Link } from '@inertiajs/react';
+import ArkaLogo from '@/components/arka-logo';
 import { home } from '@/routes';
 import type { AuthLayoutProps } from '@/types';
 
@@ -8,36 +8,55 @@ export default function AuthSplitLayout({
     title,
     description,
 }: AuthLayoutProps) {
-    const { name } = usePage().props;
-
     return (
-        <div className="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
-            <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
-                <div className="absolute inset-0 bg-zinc-900" />
-                <Link
-                    href={home()}
-                    className="relative z-20 flex items-center text-lg font-medium"
-                >
-                    <AppLogoIcon className="mr-2 size-8 fill-current text-white" />
-                    {name}
-                </Link>
-            </div>
-            <div className="w-full lg:p-8">
-                <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-                    <Link
-                        href={home()}
-                        className="relative z-20 flex items-center justify-center lg:hidden"
-                    >
-                        <AppLogoIcon className="h-10 fill-current text-black sm:h-12" />
-                    </Link>
-                    <div className="flex flex-col items-start gap-2 text-left sm:items-center sm:text-center">
-                        <h1 className="text-xl font-medium">{title}</h1>
-                        <p className="text-sm text-balance text-muted-foreground">
-                            {description}
-                        </p>
+        <div className="grid min-h-svh lg:grid-cols-2">
+            <div className="flex flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
+                <div className="w-full max-w-sm">
+                    <div className="flex flex-col gap-8">
+                        <Link
+                            href={home()}
+                            className="flex flex-col items-center gap-2 font-medium lg:hidden"
+                        >
+                            <ArkaLogo className="h-12 w-auto text-[#0b1b3a]" />
+                        </Link>
+
+                        <div className="flex flex-col gap-2 text-center">
+                            <h1 className="text-xl font-semibold">{title}</h1>
+                            <p className="text-sm text-balance text-muted-foreground">
+                                {description}
+                            </p>
+                        </div>
+                        {children}
                     </div>
-                    {children}
                 </div>
+            </div>
+
+            <div className="relative hidden overflow-hidden bg-[#0b1b3a] lg:flex lg:flex-col lg:items-center lg:justify-center">
+                <svg
+                    className="absolute top-10 left-10 size-16 text-[#c9962c]/40"
+                    viewBox="0 0 100 100"
+                    fill="none"
+                    stroke="currentColor"
+                >
+                    <circle cx="50" cy="50" r="46" strokeWidth="1" />
+                    <path d="M50 4v92M4 50h92" strokeWidth="1" />
+                    <path d="M50 20L58 50L50 80L42 50Z" strokeWidth="1" />
+                </svg>
+                <svg
+                    className="absolute right-12 bottom-12 size-20 text-[#c9962c]/40"
+                    viewBox="0 0 100 100"
+                    fill="none"
+                    stroke="currentColor"
+                >
+                    <circle cx="50" cy="50" r="46" strokeWidth="1" />
+                    <path d="M50 4v92M4 50h92" strokeWidth="1" />
+                    <path d="M50 20L58 50L50 80L42 50Z" strokeWidth="1" />
+                </svg>
+
+                <ArkaLogo className="relative z-10 h-40 w-auto text-white" />
+                <p className="relative z-10 mt-6 text-sm tracking-[0.3em] text-[#c9962c] uppercase">
+                    Payroll &amp; Attendance System
+                </p>
             </div>
         </div>
     );
