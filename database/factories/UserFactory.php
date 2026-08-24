@@ -25,40 +25,30 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'role' => User::ROLE_EMPLOYEE,
             'remember_token' => Str::random(10),
-            /* @chisel-2fa */
-            'two_factor_secret' => null,
-            'two_factor_recovery_codes' => null,
-            'two_factor_confirmed_at' => null,
-            /* @end-chisel-2fa */
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Indicate that the user is an admin.
      */
-    public function unverified(): static
+    public function admin(): static
     {
         return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+            'role' => User::ROLE_ADMIN,
         ]);
     }
 
     /**
-     * Indicate that the model has two-factor authentication configured.
+     * Indicate that the user is a super admin.
      */
-    public function withTwoFactor(): static
+    public function superAdmin(): static
     {
-        /* @chisel-2fa */
         return $this->state(fn (array $attributes) => [
-            'two_factor_secret' => encrypt('secret'),
-            'two_factor_recovery_codes' => encrypt(json_encode(['recovery-code-1'])),
-            'two_factor_confirmed_at' => now(),
+            'role' => User::ROLE_SUPER_ADMIN,
         ]);
-        /* @end-chisel-2fa */
     }
 }

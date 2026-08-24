@@ -15,11 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory()->superAdmin()->create([
+            'email' => 'superadmin@arka.test',
+        ]);
+
+        User::factory()->admin()->create([
+            'email' => 'admin@arka.test',
+        ]);
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'employee@arka.test',
         ]);
     }
 }
