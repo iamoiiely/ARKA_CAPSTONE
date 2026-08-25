@@ -2,7 +2,11 @@ import type { SVGAttributes } from 'react';
 
 export default function ArkaLogo(props: SVGAttributes<SVGElement>) {
     return (
-        <svg {...props} viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+        <svg
+            {...props}
+            viewBox="0 0 220 160"
+            xmlns="http://www.w3.org/2000/svg"
+        >
             <path d="M110 8L150 70H70L110 8Z" fill="#c9962c" />
             <path d="M110 8L70 70H110V8Z" fill="#0b1b3a" />
             <path

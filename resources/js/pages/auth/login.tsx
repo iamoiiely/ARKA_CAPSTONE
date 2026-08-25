@@ -20,7 +20,6 @@ export default function Login({ status, canResetPassword }: Props) {
         <>
             <Head title="Log in" />
 
-
             <Form
                 {...store.form()}
                 resetOnSuccess={['password']}
@@ -79,7 +78,7 @@ export default function Login({ status, canResetPassword }: Props) {
 
                             <Button
                                 type="submit"
-                                className="mt-4 w-full bg-emerald-600 hover:bg-emerald-700"
+                                className="mt-4 w-full"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"
@@ -88,7 +87,6 @@ export default function Login({ status, canResetPassword }: Props) {
                                 Log in
                             </Button>
                         </div>
-
                     </>
                 )}
             </Form>

@@ -24,10 +24,19 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $sequence = mt_rand(1000, 999999);
+
         return [
-            'email' => fake()->unique()->safeEmail(),
+            'employee_no' => 'EMP-'.$sequence,
+            'name' => 'User '.$sequence,
+            'email' => 'user'.$sequence.'@arka.test',
             'password' => static::$password ??= Hash::make('password'),
             'role' => User::ROLE_EMPLOYEE,
+            'birthday' => now()->subYears(25)->subDays($sequence % 3650),
+            'phone' => '09'.str_pad((string) ($sequence % 1_000_000_000), 9, '0', STR_PAD_LEFT),
+            'status' => User::STATUS_ACTIVE,
+            'must_change_password' => false,
+            'break_allowance_minutes' => 45,
             'remember_token' => Str::random(10),
         ];
     }
@@ -49,6 +58,26 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => User::ROLE_SUPER_ADMIN,
+        ]);
+    }
+
+    /**
+     * Indicate that the user must change their password on next login.
+     */
+    public function mustChangePassword(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'must_change_password' => true,
+        ]);
+    }
+
+    /**
+     * Indicate that the user's account is deactivated.
+     */
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => User::STATUS_INACTIVE,
         ]);
     }
 }

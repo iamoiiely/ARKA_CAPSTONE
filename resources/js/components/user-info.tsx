@@ -14,18 +14,23 @@ export function UserInfo({
     return (
         <>
             <Avatar className="h-8 w-8 overflow-hidden rounded-full">
-                <AvatarImage src={user.avatar} alt={user.email} />
+                <AvatarImage
+                    src={
+                        user.photo_path
+                            ? `/storage/${user.photo_path}`
+                            : user.avatar
+                    }
+                    alt={user.name}
+                />
                 <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                    {getInitials(user.email)}
+                    {getInitials(user.name)}
                 </AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.email}</span>
-                {showEmail && (
-                    <span className="truncate text-xs text-muted-foreground capitalize">
-                        {user.role.replace('_', ' ')}
-                    </span>
-                )}
+                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate text-xs text-muted-foreground capitalize">
+                    {showEmail ? user.email : user.role.replace('_', ' ')}
+                </span>
             </div>
         </>
     );
